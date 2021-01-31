@@ -11,6 +11,6 @@ public class Main {
      * 初始化方法
      */
     private static void launcher() {
-        GameFrame gamePanel = new GameFrame();
+        GameFrame gameFrame = new GameFrame();
     }
 }
