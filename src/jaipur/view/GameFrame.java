@@ -29,20 +29,16 @@ public class GameFrame extends JFrame {
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         jFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int flag = JOptionPane.showConfirmDialog(jFrame, "是否确认退出系统?",
-                        "提示!", JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE);
+                int flag = JOptionPane.showConfirmDialog(jFrame, "是否确认退出?", "提示!",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (JOptionPane.YES_OPTION == flag) {
                     System.exit(0);
-                } else {
-                    return;
                 }
             }
         });
 
         jFrame.setResizable(false);
         jFrame.setVisible(true);
-
     }
 }
 
@@ -83,7 +79,8 @@ class WestPanel extends JPanel {
     private static final String GAME_TIP = "输入 help 获取所有命令列表\n\n" +
             "通用命令:  [num] [item]\n\n" +
             "[1] num=数量, item=物品\n[2] 举例: 1x1p, 表示1个香料和1个皮革\n" +
-            "[3] 物品:  z:珠宝 h:黄金 b:白银 s:丝绸 x:香料 p:皮革\n" +
+            "[3] 物品:  z:珠宝 h:黄金 b:白银\n" +
+            "                s:丝绸 x:香料 p:皮革 l:骆驼\n" +
             "[4] 该命令最多10个字符, 大小写不敏感";
 
     private JTextArea tipArea = new JTextArea(GAME_TIP,10,TEXTAREA_COLUMNS);
@@ -95,7 +92,6 @@ class WestPanel extends JPanel {
 
         tipArea.setLineWrap(true);
         tipArea.setEditable(false);
-        //jTextArea.setLineWrap(true);
         jTextArea.setEditable(false);
         this.add(tipArea);
         this.add(jTextArea);

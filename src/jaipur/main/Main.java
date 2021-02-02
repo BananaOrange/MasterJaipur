@@ -1,5 +1,6 @@
 package jaipur.main;
 
+import jaipur.control.GlobalState;
 import jaipur.view.GameFrame;
 
 public class Main {
@@ -12,5 +13,6 @@ public class Main {
      */
     private static void launcher() {
         GameFrame gameFrame = new GameFrame();
+        GlobalState globalState = GlobalState.getInstance();
     }
 }
