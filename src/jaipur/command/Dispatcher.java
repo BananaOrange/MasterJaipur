@@ -1,24 +1,49 @@
 package jaipur.command;
 
+import jaipur.control.BaseState;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+
 /**
- * 命令分发类
+ * 命令分发(处理)类
  */
 public class Dispatcher {
     /**
      * 分发命令
      */
-    public static void postCommand(String command) {
-        if(simpleCheck(command)) {
-            // TODO: 2021-02-11 利用反射实现命令分发
-        }else {
-            // TODO: 2021-02-11 调用统一的错误命令处理方法
+    public static void postCommand(String command) throws Exception{
+        try{
+            //对输入命令做简单的校验
+            String commandKey;
+            command = command.trim();
+            if(command.contains(" ")) {
+                commandKey = command.split("\\s+")[0];
+            }else {
+                commandKey = command;
+            }
+            //判断是否是预设命令
+            HashMap<String, Class> commandMap = BaseState.getInstance().getCommandMap();
+            if (commandMap.get(commandKey) != null) {
+                Class clazz = commandMap.get(commandKey);
+                Method execMethod = clazz.getDeclaredMethod("exec" );
+                execMethod.invoke(clazz);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new Exception();
         }
+
     }
 
     /**
-     * 对输入命令进行简单判断
+     * 装载命令
      */
-    public static boolean simpleCheck(String command) {
-        boolean flag = false;//命令判断结果
+    public static void loadCommand() {
+        BaseState baseState = BaseState.getInstance();
+        HashMap<String, Class> commandMap = baseState.getCommandMap();
+        commandMap.put("start", CommandStart.class);
+        baseState.setCommandMap(commandMap);
     }
 }

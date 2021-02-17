@@ -6,12 +6,9 @@ import jaipur.model.GoodsPile;
 import jaipur.model.Player;
 
 /**
- * 保存全局游戏状态
+ * 只保存游戏局面,以减少后续的计算量
  */
-public class GlobalState {
-
-
-    private int handOrder = 0;//先后手次序 0:先手 1:后手
+public class GameState {
 
     private Player opponent = new Player();//玩家：对手
     private Player myself = new Player();//玩家：自己
@@ -19,29 +16,21 @@ public class GlobalState {
     private GoodsPile goodsPile = new GoodsPile();//货物标志堆
     private BonusPile bonusPile = new BonusPile();//奖励标志堆
 
-    private static GlobalState instance = new GlobalState();
+    private static GameState instance = new GameState();
 
     /**
      * 私有构造方法
      */
-    private GlobalState() { }
+    private GameState() { }
 
     /**
      * 获取实例
      */
-    public static GlobalState getInstance() {
+    public static GameState getInstance() {
         if (instance == null) {
-            instance = new GlobalState();
+            instance = new GameState();
         }
         return instance;
-    }
-
-    public int getHandOrder() {
-        return handOrder;
-    }
-
-    public void setHandOrder(int handOrder) {
-        this.handOrder = handOrder;
     }
 
     public Player getOpponent() {
