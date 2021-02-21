@@ -1,11 +1,7 @@
 package jaipur.view;
 
-import jaipur.command.Dispatcher;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -14,21 +10,24 @@ import java.awt.event.WindowEvent;
  */
 public class GameFrame extends JFrame {
 
-    //面板宽度
-    private static final int PANEL_WIDTH = 600;
-    //面板高度
-    private static final int PANEL_HEIGHT = 600;
-    //标题
-    private static final String PANEL_TITLE = "斋普尔AI V0.1";
+    private static final int PANEL_WIDTH = 600;//面板宽度
+    private static final int PANEL_HEIGHT = 600;//面板高度
+    private static final String PANEL_TITLE = "斋普尔AI V0.1";//标题
+    private NorthPanel northPanel;//顶部面板
+    private WestPanel westPanel;//左侧面板
+    private EastPanel eastPanel;//右侧面板
 
     public GameFrame() {
         JFrame jFrame = new JFrame();
         jFrame.setSize(PANEL_WIDTH, PANEL_HEIGHT);
         jFrame.setTitle(PANEL_TITLE);
 
-        jFrame.add(new NorthPanel(), BorderLayout.NORTH);
-        jFrame.add(new WestPanel(), BorderLayout.WEST);
-        jFrame.add(new EastPanel(), BorderLayout.EAST);
+        northPanel = new NorthPanel();
+        westPanel = new WestPanel();
+        eastPanel = new EastPanel();
+        jFrame.add(northPanel, BorderLayout.NORTH);
+        jFrame.add(westPanel, BorderLayout.WEST);
+        jFrame.add(eastPanel, BorderLayout.EAST);
 
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         jFrame.addWindowListener(new WindowAdapter() {
@@ -43,6 +42,30 @@ public class GameFrame extends JFrame {
 
         jFrame.setResizable(false);
         jFrame.setVisible(true);
+    }
+
+    public NorthPanel getNorthPanel() {
+        return northPanel;
+    }
+
+    public void setNorthPanel(NorthPanel northPanel) {
+        this.northPanel = northPanel;
+    }
+
+    public WestPanel getWestPanel() {
+        return westPanel;
+    }
+
+    public void setWestPanel(WestPanel westPanel) {
+        this.westPanel = westPanel;
+    }
+
+    public EastPanel getEastPanel() {
+        return eastPanel;
+    }
+
+    public void setEastPanel(EastPanel eastPanel) {
+        this.eastPanel = eastPanel;
     }
 }
 
@@ -65,9 +88,17 @@ class NorthPanel extends JPanel {
         jLabel.setSize(50,ELEMENT_HEIGHT);
         jTextField.setPreferredSize(new Dimension(350, ELEMENT_HEIGHT));
         jButton.setPreferredSize(new Dimension(100, ELEMENT_HEIGHT));
+        //为按钮添加事件
+        ButtonListener buttonListener = new ButtonListener();
+        jButton.addActionListener(buttonListener);
+
         this.add(jLabel);
         this.add(jTextField);
         this.add(jButton);
+    }
+
+    public JTextField getjTextField() {
+        return jTextField;
     }
 }
 

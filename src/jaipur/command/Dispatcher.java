@@ -12,7 +12,7 @@ public class Dispatcher {
     /**
      * 分发命令
      */
-    public static void postCommand(String command) throws Exception{
+    public static void postCommand(String command) {
         try{
             //对输入命令做简单的校验
             String commandKey;
@@ -32,7 +32,7 @@ public class Dispatcher {
                 throw new Exception();
             }
         } catch (Exception e) {
-            throw new Exception();
+            //throw e;
         }
 
     }

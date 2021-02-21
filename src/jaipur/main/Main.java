@@ -2,6 +2,7 @@ package jaipur.main;
 
 import jaipur.command.Dispatcher;
 import jaipur.view.GameFrame;
+import jaipur.view.StoredViews;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,9 +14,8 @@ public class Main {
      */
     private static void launcher() {
         //初始化界面
-        GameFrame gameFrame = new GameFrame();
+        StoredViews storedViews = StoredViews.getInstance();
         //初始化命令列表等
         Dispatcher.loadCommand();
-
     }
 }

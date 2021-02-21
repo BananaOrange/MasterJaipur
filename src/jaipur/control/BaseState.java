@@ -1,7 +1,6 @@
 package jaipur.control;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * 保存一些基本的游戏状态
@@ -9,7 +8,7 @@ import java.util.HashSet;
 public class BaseState {
 
     private int handOrder = 0;//先后手次序 0:先手 1:后手
-    private HashMap<String, Class> commandMap;//命令列表
+    private HashMap<String, Class> commandMap = new HashMap<>();//命令列表
 
     private static BaseState instance = new BaseState();
 
