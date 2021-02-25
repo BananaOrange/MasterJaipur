@@ -1,6 +1,8 @@
 package jaipur.command;
 
 import jaipur.annotation.Command;
+import jaipur.constant.Const;
+import jaipur.view.StoredViews;
 
 /**
  * 命令：开始游戏
@@ -13,11 +15,17 @@ import jaipur.annotation.Command;
  * 说明：0表示自己是先手; 1表示自己是后手
  */
 @Command("start")
-public class CommandStart {
+public class CommandStart extends BaseCommand {
     /**
      * 执行命令
      */
-    public static void exec() {
+    public static void exec(String command) {
+        String[] splitCommand = getSplitCommand(command);
+        System.out.println(splitCommand.length);
+        if(splitCommand.length == 5) {
 
+        }else {
+            StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARAM_MISSING);
+        }
     }
 }

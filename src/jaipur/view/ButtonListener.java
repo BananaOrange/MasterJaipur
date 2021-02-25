@@ -13,6 +13,6 @@ public class ButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         NorthPanel northPanel = StoredViews.getInstance().getGameFrame().getNorthPanel();
         String command = northPanel.getjTextField().getText();
-        Dispatcher.postCommand(command);
+        Dispatcher.postCommand(command.toLowerCase());
     }
 }

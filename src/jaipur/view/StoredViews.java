@@ -2,6 +2,10 @@ package jaipur.view;
 
 import jaipur.control.BaseState;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 保存界面上所有组件，便于其他类统一操作
  */
@@ -26,5 +30,16 @@ public class StoredViews {
 
     public void setGameFrame(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
+    }
+
+    /**
+     * 在面板上显示命令相关消息
+     */
+    public void showCommandMessage(String message) {
+        JTextArea jTextArea = gameFrame.getWestPanel().getjTextArea();
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String time = "【" + dateFormat.format(date) + "】 ";
+        jTextArea.setText(time + message);
     }
 }

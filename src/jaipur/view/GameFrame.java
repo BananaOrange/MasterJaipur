@@ -109,16 +109,17 @@ class WestPanel extends JPanel {
 
     private static final int WEST_PANEL_WIDTH = 300;
     private static final int WEST_PANEL_HEIGHT = 500;
-    private static final int TEXTAREA_ROWS = 20;
+    private static final int TEXTAREA_ROWS = 18;
     private static final int TEXTAREA_COLUMNS = 25;
     private static final String GAME_TIP = "输入 help 获取所有命令列表\n\n" +
-            "通用命令:  [num] [item]\n\n" +
-            "[1] num=数量, item=物品\n[2] 举例: 1x1p, 表示1个香料和1个皮革\n" +
-            "[3] 物品:  z:珠宝 h:黄金 b:白银\n" +
-            "                s:丝绸 x:香料 p:皮革 l:骆驼\n" +
-            "[4] 该命令最多10个字符, 大小写不敏感";
+            "表示货物的通用命令:  [num] [item]\n\n" +
+            "[1] num=数量, item=物品\n[2] 举例: 1x2p, 表示1个香料和2个皮革\n" +
+            "[3] 该命令最多10个字符, 大小写不敏感\n" +
+            "[4] 物品:  z:钻石  h:黄金  b:白银\n" +
+            "                s:丝绸  x:香料  p:皮革\n" +
+            "                l:骆驼\n";
 
-    private JTextArea tipArea = new JTextArea(GAME_TIP,10,TEXTAREA_COLUMNS);
+    private JTextArea tipArea = new JTextArea(GAME_TIP,12,TEXTAREA_COLUMNS);
     private JTextArea jTextArea = new JTextArea(TEXTAREA_ROWS, TEXTAREA_COLUMNS);
     private JScrollPane jScrollPane = new JScrollPane(jTextArea);
 
@@ -128,8 +129,13 @@ class WestPanel extends JPanel {
         tipArea.setLineWrap(true);
         tipArea.setEditable(false);
         jTextArea.setEditable(false);
+        jTextArea.setLineWrap(true);
         this.add(tipArea);
         this.add(jTextArea);
+    }
+
+    public JTextArea getjTextArea() {
+        return jTextArea;
     }
 }
 
