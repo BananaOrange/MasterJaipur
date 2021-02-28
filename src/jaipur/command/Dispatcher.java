@@ -2,6 +2,7 @@ package jaipur.command;
 
 import jaipur.constant.Const;
 import jaipur.control.BaseState;
+import jaipur.control.GameState;
 import jaipur.view.StoredViews;
 
 import java.lang.reflect.Method;
@@ -34,6 +35,10 @@ public class Dispatcher {
             } else {
                 throw new Exception();
             }
+            //刷新并输出游戏全局信息
+            String gameInfo = GameState.getInstance().refreshGameState();
+            StoredViews.getInstance().showGameInfo(gameInfo);
+
         } catch (Exception e) {
             StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARSING_ERROR);
         }
@@ -51,15 +56,14 @@ public class Dispatcher {
         commandMap.put("start", CommandStart.class);
         baseState.setCommandMap(commandMap);
         //装载预设物品列表
-        HashSet<String> itemSet = baseState.getItemSet();
-        itemSet.add("1z");itemSet.add("2z");itemSet.add("3z");itemSet.add("4z");itemSet.add("5z");
-        itemSet.add("1h");itemSet.add("2h");itemSet.add("3h");itemSet.add("4h");itemSet.add("5h");
-        itemSet.add("1b");itemSet.add("2b");itemSet.add("3b");itemSet.add("4b");itemSet.add("5b");
-        itemSet.add("1s");itemSet.add("2s");itemSet.add("3s");itemSet.add("4s");itemSet.add("5s");
-        itemSet.add("1x");itemSet.add("2x");itemSet.add("3x");itemSet.add("4x");itemSet.add("5x");
-        itemSet.add("1p");itemSet.add("2p");itemSet.add("3p");itemSet.add("4p");itemSet.add("5p");
-        itemSet.add("1l");itemSet.add("2l");itemSet.add("3l");itemSet.add("4l");itemSet.add("5l");
-        baseState.setItemSet(itemSet);
-
+        HashMap<String, Integer> itemMap = baseState.getItemMap();
+        itemMap.put("1z", 0);itemMap.put("2z", 0);itemMap.put("3z", 0);itemMap.put("4z", 0);itemMap.put("5z", 0);
+        itemMap.put("1h", 1);itemMap.put("2h", 1);itemMap.put("3h", 1);itemMap.put("4h", 1);itemMap.put("5h", 1);
+        itemMap.put("1b", 2);itemMap.put("2b", 2);itemMap.put("3b", 2);itemMap.put("4b", 2);itemMap.put("5b", 2);
+        itemMap.put("1s", 3);itemMap.put("2s", 3);itemMap.put("3s", 3);itemMap.put("4s", 3);itemMap.put("5s", 3);
+        itemMap.put("1x", 4);itemMap.put("2x", 4);itemMap.put("3x", 4);itemMap.put("4x", 4);itemMap.put("5x", 4);
+        itemMap.put("1p", 5);itemMap.put("2p", 5);itemMap.put("3p", 5);itemMap.put("4p", 5);itemMap.put("5p", 5);
+        itemMap.put("1l", 6);itemMap.put("2l", 6);itemMap.put("3l", 6);itemMap.put("4l", 6);itemMap.put("5l", 6);
+        baseState.setItemMap(itemMap);
     }
 }

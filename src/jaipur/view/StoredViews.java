@@ -42,4 +42,12 @@ public class StoredViews {
         String time = "【" + dateFormat.format(date) + "】 ";
         jTextArea.setText(time + message);
     }
+
+    /**
+     * 在面板上显示游戏全局信息
+     */
+    public void showGameInfo(String gameInfo) {
+        JTextArea jTextArea = gameFrame.getEastPanel().getjTextArea();
+        jTextArea.setText(gameInfo);
+    }
 }

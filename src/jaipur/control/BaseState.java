@@ -1,7 +1,6 @@
 package jaipur.control;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * 保存一些基本的游戏状态
@@ -10,7 +9,7 @@ public class BaseState {
 
     private int handOrder = 0;//先后手次序 0:先手 1:后手
     private HashMap<String, Class> commandMap = new HashMap<>();//命令列表
-    private HashSet<String> itemSet = new HashSet<>();//预设物品列表,用于快速判断输入命令正确与否
+    private HashMap<String, Integer> itemMap = new HashMap<String, Integer>();//预设物品列表,用于快速判断输入命令正确与否;同时为牌堆数组快速提供下标值,便于操作数组
 
     private static BaseState instance = new BaseState();
 
@@ -39,11 +38,11 @@ public class BaseState {
         this.commandMap = commandMap;
     }
 
-    public HashSet<String> getItemSet() {
-        return itemSet;
+    public HashMap<String, Integer> getItemMap() {
+        return itemMap;
     }
 
-    public void setItemSet(HashSet<String> itemSet) {
-        this.itemSet = itemSet;
+    public void setItemMap(HashMap<String, Integer> itemMap) {
+        this.itemMap = itemMap;
     }
 }

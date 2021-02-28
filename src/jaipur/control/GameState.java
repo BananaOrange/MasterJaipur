@@ -72,4 +72,18 @@ public class GameState {
     public void setBonusPile(BonusPile bonusPile) {
         this.bonusPile = bonusPile;
     }
+
+    /**
+     * 刷新游戏全局信息
+     */
+    public String refreshGameState() {
+        StringBuffer gameInfo = new StringBuffer();
+        //刷新玩家信息
+        gameInfo.append("---------------------------玩家信息---------------------------\n");
+        gameInfo.append("【我】得分：" + myself.getMinScore() + " ~ " + myself.getMaxScore());
+        gameInfo.append("                              骆驼牌：" + myself.getHandCards()[6] + "\n");
+        gameInfo.append("钻石：" + myself.getHandCards()[0] + "  黄金：" + myself.getHandCards()[1]);
+
+        return gameInfo.toString();
+    }
 }

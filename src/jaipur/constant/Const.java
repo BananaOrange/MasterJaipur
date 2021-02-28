@@ -28,4 +28,8 @@ public class Const {
     public static final String COMMAND_PARSING_ERROR = "命令解析错误,请重新输入";
 
     public static final String COMMAND_PARAM_MISSING = "命令参数个数不足,请重新输入";
+
+    public static final String COMMAND_ITEMS_ERROR = "命令中货物通用命令输入错误,请重新输入";
+
+    public static final String COMMAND_ORDER_ERROR = "命令中先后手标志输入错误,请重新输入";
 }

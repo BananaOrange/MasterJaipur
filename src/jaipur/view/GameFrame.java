@@ -159,4 +159,12 @@ class EastPanel extends JPanel {
         jTextArea.setEditable(false);
         this.add(jTextArea);
     }
+
+    public JTextArea getjTextArea() {
+        return jTextArea;
+    }
+
+    public void setjTextArea(JTextArea jTextArea) {
+        this.jTextArea = jTextArea;
+    }
 }

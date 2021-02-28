@@ -14,7 +14,7 @@ public class Main {
      */
     private static void launcher() {
         //初始化界面
-        StoredViews storedViews = StoredViews.getInstance();
+        StoredViews.getInstance();
         //初始化命令列表等
         Dispatcher.loadCommand();
     }
