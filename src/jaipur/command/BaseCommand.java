@@ -1,6 +1,8 @@
 package jaipur.command;
 
+import jaipur.constant.HandOrder;
 import jaipur.control.BaseState;
+import jaipur.control.GameState;
 
 import java.util.HashMap;
 
@@ -35,5 +37,16 @@ public class BaseCommand {
         }
 
         return true;
+    }
+
+    /**
+     * 命令执行成功后需进行的后续操作
+     */
+    public static void execSuccess(GameState gameState) {
+        //交替更换当前游戏方
+        if(gameState.getHandOrder() == HandOrder.MYSELF) {
+
+        }
+        //刷新游戏全局信息
     }
 }

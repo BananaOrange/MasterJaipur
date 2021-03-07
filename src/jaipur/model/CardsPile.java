@@ -36,6 +36,7 @@ public class CardsPile {
      * 初始化未翻开的牌堆
      */
     public void initUnknownCards() {
+        //初始化未翻开牌堆
         unknownCards[0] = 6;
         unknownCards[1] = 6;
         unknownCards[2] = 6;
@@ -43,6 +44,14 @@ public class CardsPile {
         unknownCards[4] = 8;
         unknownCards[5] = 10;
         unknownCards[6] = 11;
+        //初始化公共牌堆
+        publicCards[0] = 0;
+        publicCards[1] = 0;
+        publicCards[2] = 0;
+        publicCards[3] = 0;
+        publicCards[4] = 0;
+        publicCards[5] = 0;
+        publicCards[6] = 0;
     }
 
     /**
@@ -50,7 +59,7 @@ public class CardsPile {
      *
      * 说明：命令中数字表示从未翻开牌堆中减去的牌的数量
      */
-    public void deelCards(String command) {
+    public void removeUnknownCards(String command) {
         HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
 
         for(int i=1; i<=command.length()/2; i++) {
@@ -61,17 +70,32 @@ public class CardsPile {
     }
 
     /**
-     * 设置公共牌堆
+     * 给公共牌堆添加牌
      *
-     * 说明：命令中数字表示公共牌堆中要设置的牌的数量
+     * 说明：命令中数字表示公共牌堆中添加的牌的数量
      */
-    public void fitPublicCards(String command) {
+    public void addPublicCards(String command) {
         HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
 
         for(int i=1; i<=command.length()/2; i++) {
             String sub = command.substring(i*2-2, i*2);
             int index = itemMap.get(sub);
-            publicCards[index] = Integer.parseInt(sub.substring(0, 1));
+            publicCards[index] = publicCards[index] + Integer.parseInt(sub.substring(0, 1));
+        }
+    }
+
+    /**
+     * 从公共牌堆中拿牌
+     *
+     * 说明：命令中数字表示公共牌堆中减去的牌的数量
+     */
+    public void removePublicCards(String command) {
+        HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
+
+        for(int i=1; i<=command.length()/2; i++) {
+            String sub = command.substring(i*2-2, i*2);
+            int index = itemMap.get(sub);
+            publicCards[index] = publicCards[index] - Integer.parseInt(sub.substring(0, 1));
         }
     }
 }

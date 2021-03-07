@@ -30,7 +30,7 @@ public class Dispatcher {
             HashMap<String, Class> commandMap = BaseState.getInstance().getCommandMap();
             if (commandMap.get(commandKey) != null) {
                 Class clazz = commandMap.get(commandKey);
-                Method execMethod = clazz.getDeclaredMethod("exec", String.class );
+                Method execMethod = clazz.getDeclaredMethod("exec", String.class);
                 execMethod.invoke(clazz, new Object[]{command} );
             } else {
                 throw new Exception();
@@ -54,6 +54,7 @@ public class Dispatcher {
         //装载命令列表
         HashMap<String, Class> commandMap = baseState.getCommandMap();
         commandMap.put("start", CommandStart.class);
+        commandMap.put("take", CommandTake.class);
         baseState.setCommandMap(commandMap);
         //装载预设物品列表
         HashMap<String, Integer> itemMap = baseState.getItemMap();

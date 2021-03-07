@@ -54,11 +54,11 @@ public class Player {
     }
 
     /**
-     * 设置手牌
+     * 添加手牌
      *
-     * 说明：命令中数字表示公共牌堆中要设置的牌的数量
+     * 说明：命令中数字表示手牌堆中添加的牌的数量
      */
-    public void fitHandCards(String command) {
+    public void addHandCards(String command) {
         HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
 
         for(int i=1; i<=command.length()/2; i++) {
@@ -69,9 +69,9 @@ public class Player {
     }
 
     /**
-     * 将牌堆中牌的数量设置为-1，表示数量未知
+     * 将手牌堆中牌的数量设置为-1，表示数量未知
      */
-    public void fitHandCardsWithMinusOne(int index) {
+    public void setUnknownHandCards(int index) {
         handCards[index] = -1;
     }
 }

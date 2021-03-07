@@ -1,5 +1,6 @@
 package jaipur.control;
 
+import jaipur.constant.HandOrder;
 import jaipur.model.BonusPile;
 import jaipur.model.CardsPile;
 import jaipur.model.GoodsPile;
@@ -10,6 +11,7 @@ import jaipur.model.Player;
  */
 public class GameState {
 
+    private Enum<HandOrder> handOrder;//当前游戏方
     private Player opponent = new Player();//玩家：对手
     private Player myself = new Player();//玩家：自己
     private CardsPile cardsPile = new CardsPile();//牌堆
@@ -71,6 +73,14 @@ public class GameState {
 
     public void setBonusPile(BonusPile bonusPile) {
         this.bonusPile = bonusPile;
+    }
+
+    public Enum<HandOrder> getHandOrder() {
+        return handOrder;
+    }
+
+    public void setHandOrder(Enum<HandOrder> handOrder) {
+        this.handOrder = handOrder;
     }
 
     /**
