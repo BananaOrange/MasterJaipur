@@ -64,7 +64,22 @@ public class Player {
         for(int i=1; i<=command.length()/2; i++) {
             String sub = command.substring(i*2-2, i*2);
             int index = itemMap.get(sub);
-            handCards[index] = Integer.parseInt(sub.substring(0, 1));
+            handCards[index] = handCards[index] + Integer.parseInt(sub.substring(0, 1));
+        }
+    }
+
+    /**
+     * 拿取手牌
+     *
+     * 说明：命令中数字表示手牌堆中减去的牌的数量
+     */
+    public void removeHandCards(String command) {
+        HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
+
+        for(int i=1; i<=command.length()/2; i++) {
+            String sub = command.substring(i*2-2, i*2);
+            int index = itemMap.get(sub);
+            handCards[index] = handCards[index] - Integer.parseInt(sub.substring(0, 1));
         }
     }
 
@@ -73,5 +88,15 @@ public class Player {
      */
     public void setUnknownHandCards(int index) {
         handCards[index] = -1;
+    }
+
+    /**
+     *  更新玩家分数
+     *
+     *  说明：传入的参数表示待增加的分数范围
+     */
+    public void addScore(int min, int max) {
+        minScore += min;
+        maxScore += max;
     }
 }

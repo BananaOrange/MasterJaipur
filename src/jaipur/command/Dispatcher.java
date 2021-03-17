@@ -7,7 +7,6 @@ import jaipur.view.StoredViews;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * 命令分发(处理)类
@@ -30,6 +29,7 @@ public class Dispatcher {
             HashMap<String, Class> commandMap = BaseState.getInstance().getCommandMap();
             if (commandMap.get(commandKey) != null) {
                 Class clazz = commandMap.get(commandKey);
+                // TODO: 2021/3/17 考虑将GameState由外部传入，而不是在命令类中获取实例 
                 Method execMethod = clazz.getDeclaredMethod("exec", String.class);
                 execMethod.invoke(clazz, new Object[]{command} );
             } else {
@@ -55,6 +55,9 @@ public class Dispatcher {
         HashMap<String, Class> commandMap = baseState.getCommandMap();
         commandMap.put("start", CommandStart.class);
         commandMap.put("take", CommandTake.class);
+        commandMap.put("swap", CommandSwap.class);
+        commandMap.put("sell", CommandSell.class);
+        //commandMap.put("camel", CommandCamel.class);
         baseState.setCommandMap(commandMap);
         //装载预设物品列表
         HashMap<String, Integer> itemMap = baseState.getItemMap();

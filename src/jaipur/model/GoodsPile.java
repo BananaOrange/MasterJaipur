@@ -1,6 +1,9 @@
 package jaipur.model;
 
+import jaipur.control.BaseState;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -70,5 +73,65 @@ public class GoodsPile {
 
     public void setLeatherScore(int[] leatherScore) {
         this.leatherScore = leatherScore;
+    }
+
+    /**
+     *  获取出售货物后的分值
+     */
+    public int getGoodsScore(String command) {
+        HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
+
+        int index = itemMap.get(command);
+        int score = 0;
+
+        switch (index) {
+            case 0 :
+                score = removeGoods(diamondScore, command);
+                break;
+
+            case 1 :
+                score = removeGoods(goldScore, command);
+                break;
+
+            case 2 :
+                score = removeGoods(silverScore, command);
+                break;
+
+            case 3 :
+                score = removeGoods(silkScore, command);
+                break;
+
+            case 4 :
+                score = removeGoods(spiceScore, command);
+                break;
+
+            case 5 :
+                score = removeGoods(leatherScore, command);
+                break;
+
+            default:
+                score = 0;
+        }
+
+        return score;
+    }
+
+    public int removeGoods(int[] goodsPile, String command) {
+        int goodsNum = Integer.parseInt(command.substring(0, 1));//货物个数
+        int score = 0;
+        int count = 0;
+
+        for (int i=0; i<goodsPile.length; i++) {
+            if(goodsPile[i] != 0) {
+                score += goodsPile[i];
+                goodsPile[i] = 0;
+                count++;
+            }
+            if(count == goodsNum) {
+                break;
+            }
+        }
+
+        return score;
     }
 }

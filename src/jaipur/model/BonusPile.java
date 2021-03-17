@@ -1,5 +1,9 @@
 package jaipur.model;
 
+import jaipur.control.BaseState;
+
+import java.util.HashMap;
+
 /**
  * 奖励标志类
  */
@@ -100,5 +104,42 @@ public class BonusPile {
 
     public void setFiveTokenNum(int fiveTokenNum) {
         this.fiveTokenNum = fiveTokenNum;
+    }
+
+    /**
+     *  获取出售货物后的奖励分值
+     */
+    public int[] getBonusScore(String command) {
+
+        int[] score = new int[]{0, 0};
+        int goodsNum = Integer.parseInt(command.substring(0, 1));//货物个数
+
+        if(goodsNum < 3) {
+            return score;
+        }else {
+            switch (goodsNum) {
+                case 3 :
+                    score[0] = threeMinScore;
+                    score[1] = threeMaxScore;
+                    threeTokenNum --;
+                    break;
+
+                case 4 :
+                    score[0] = fourMinScore;
+                    score[1] = fourMaxScore;
+                    fourTokenNum --;
+                    break;
+
+                case 5 :
+                    score[0] = fiveMinScore;
+                    score[1] = fiveMaxScore;
+                    fiveTokenNum --;
+                    break;
+                default:
+                    score[0] = 0;
+                    score[1] = 0;
+            }
+        }
+        return score;
     }
 }

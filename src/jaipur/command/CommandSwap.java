@@ -8,15 +8,15 @@ import jaipur.view.StoredViews;
 
 /**
  *
- * 用途：从公共牌堆中拿取一张牌，并从未翻开牌堆中拿取一张牌补充到公共牌堆
+ * 用途：从公共牌堆中拿取多张牌，并与玩家手牌交换
  *
- * 语法：take [公共牌堆] [翻出的牌]
- * 举例：take 1h 1x
+ * 语法：swap [公共牌堆] [玩家手牌]
+ * 举例：swap 1z1h 2p
  *
  * 说明：该命令可以用于自身，也可以用于对手
  */
-@Command("take")
-public class CommandTake extends BaseCommand{
+@Command("swap")
+public class CommandSwap extends BaseCommand{
     /**
      * 执行命令(需判断当前游戏方)
      */
@@ -34,20 +34,24 @@ public class CommandTake extends BaseCommand{
                 return;
             }
 
-            //从公共牌堆中拿取一张牌
+            //从公共牌堆中拿取多张牌
             gameState.getCardsPile().removePublicCards(splitCommand[1]);
 
-            //将该张牌添加到手牌堆中(需判断当前游戏方)
+            //将公共牌堆的牌添加到玩家手牌堆中(需判断当前游戏方)
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().addHandCards(splitCommand[1]);
             }else {
                 gameState.getOpponent().addHandCards(splitCommand[1]);
             }
 
-            //从未翻开牌堆中拿取一张牌
-            gameState.getCardsPile().removeUnknownCards(splitCommand[2]);
+            //从玩家手牌堆中拿取待交换的牌(需判断当前游戏方)
+            if(gameState.getHandOrder() == HandOrder.MYSELF) {
+                gameState.getMyself().removeHandCards(splitCommand[2]);
+            }else {
+                gameState.getOpponent().removeHandCards(splitCommand[2]);
+            }
 
-            //将该张牌添加到公共牌堆中
+            //将玩家待交换的牌添加到公共牌堆
             gameState.getCardsPile().addPublicCards(splitCommand[2]);
 
         }else {

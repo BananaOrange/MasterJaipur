@@ -7,7 +7,7 @@ import jaipur.control.GameState;
 import jaipur.view.StoredViews;
 
 /**
- * 命令：开始游戏
+ *
  * 用途：开始一局新游戏，并初始化必要的状态
  *
  * 语法：start [公共牌堆] [我的手牌] [对手骆驼牌数量] [先后手]

@@ -87,6 +87,7 @@ public class GameState {
      * 刷新游戏全局信息
      */
     public String refreshGameState() {
+        // TODO: 2021/3/17 需要补充完整的游戏信息 
         StringBuffer gameInfo = new StringBuffer();
         //刷新玩家信息
         gameInfo.append("---------------------------玩家信息---------------------------\n");
