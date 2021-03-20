@@ -37,11 +37,10 @@ public class StoredViews {
      */
     public void showCommandMessage(String message) {
         JTextArea jTextArea = gameFrame.getWestPanel().getjTextArea();
-        jTextArea.setText("");//清空面板消息
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = "【" + dateFormat.format(date) + "】 ";
-        jTextArea.setText(time + message);
+        jTextArea.setText(time + "\n\n" + message);
     }
 
     /**

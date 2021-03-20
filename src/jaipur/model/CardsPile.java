@@ -1,5 +1,6 @@
 package jaipur.model;
 
+import jaipur.constant.Const;
 import jaipur.control.BaseState;
 
 import java.util.HashMap;
@@ -37,13 +38,13 @@ public class CardsPile {
      */
     public void initUnknownCards() {
         //初始化未翻开牌堆
-        unknownCards[0] = 6;
-        unknownCards[1] = 6;
-        unknownCards[2] = 6;
-        unknownCards[3] = 8;
-        unknownCards[4] = 8;
-        unknownCards[5] = 10;
-        unknownCards[6] = 11;
+        unknownCards[0] = Const.DIAMOND_CARD_NUM;
+        unknownCards[1] = Const.GOLD_CARD_NUM;
+        unknownCards[2] = Const.SILVER_CARD_NUM;
+        unknownCards[3] = Const.SILK_CARD_NUM;
+        unknownCards[4] = Const.SPICE_CARD_NUM;
+        unknownCards[5] = Const.LEATHER_CARD_NUM;
+        unknownCards[6] = Const.CAMEL_CARD_NUM;
         //初始化公共牌堆
         publicCards[0] = 0;
         publicCards[1] = 0;

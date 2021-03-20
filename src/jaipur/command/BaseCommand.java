@@ -3,6 +3,7 @@ package jaipur.command;
 import jaipur.constant.HandOrder;
 import jaipur.control.BaseState;
 import jaipur.control.GameState;
+import jaipur.view.StoredViews;
 
 import java.util.HashMap;
 
@@ -41,13 +42,26 @@ public class BaseCommand {
 
     /**
      * 命令执行成功后需进行的后续操作
+     *
+     * exchangeFlag:是否交换当前游戏方  printFlag:是否打印游戏信息
      */
-    public static void execSuccess(GameState gameState) {
-        //交替更换当前游戏方
-        if(gameState.getHandOrder() == HandOrder.MYSELF) {
+    public static void execSuccess(boolean exchangeFlag, boolean printFlag) {
 
+        GameState gameState = GameState.getInstance();
+
+        if(exchangeFlag) {
+            //交替更换当前游戏方
+            if(gameState.getHandOrder() == HandOrder.MYSELF) {
+                gameState.setHandOrder(HandOrder.OPPONENT);
+            }else {
+                gameState.setHandOrder(HandOrder.MYSELF);
+            }
         }
-        //刷新游戏全局信息
-        // TODO: 2021/3/17 需要实现该方法，并在各个子类中显示调用 
+
+        if(printFlag) {
+             //刷新并输出游戏全局信息
+             String gameInfo = GameState.getInstance().refreshGameState();
+             StoredViews.getInstance().showGameInfo(gameInfo);
+         }
     }
 }

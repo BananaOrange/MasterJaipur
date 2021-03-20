@@ -50,6 +50,7 @@ public class CommandTake extends BaseCommand{
             //将该张牌添加到公共牌堆中
             gameState.getCardsPile().addPublicCards(splitCommand[2]);
 
+            execSuccess(true, true);
         }else {
             StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARAM_MISSING);
         }

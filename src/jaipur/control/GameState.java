@@ -6,6 +6,9 @@ import jaipur.model.CardsPile;
 import jaipur.model.GoodsPile;
 import jaipur.model.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * 只保存游戏局面,以减少后续的计算量
  */
@@ -87,13 +90,37 @@ public class GameState {
      * 刷新游戏全局信息
      */
     public String refreshGameState() {
-        // TODO: 2021/3/17 需要补充完整的游戏信息 
         StringBuffer gameInfo = new StringBuffer();
         //刷新玩家信息
+        gameInfo.append("当前游戏方：" + (handOrder==HandOrder.MYSELF?"我":"对手") + "\n");
+        gameInfo.append("\n");
         gameInfo.append("---------------------------玩家信息---------------------------\n");
         gameInfo.append("【我】得分：" + myself.getMinScore() + " ~ " + myself.getMaxScore());
         gameInfo.append("                              骆驼牌：" + myself.getHandCards()[6] + "\n");
-        gameInfo.append("钻石：" + myself.getHandCards()[0] + "  黄金：" + myself.getHandCards()[1]);
+        gameInfo.append("钻石：" + myself.getHandCards()[0] + "  黄金：" + myself.getHandCards()[1] + "  白银：" + myself.getHandCards()[2] + "\n");
+        gameInfo.append("丝绸：" + myself.getHandCards()[3] + "  香料：" + myself.getHandCards()[4] + "  皮革：" + myself.getHandCards()[5] + "\n");
+        gameInfo.append("\n");
+        gameInfo.append("【对手】得分：" + opponent.getMinScore() + " ~ " + opponent.getMaxScore());
+        gameInfo.append("                           骆驼牌：" + opponent.getHandCards()[6] + "\n");
+        gameInfo.append("钻石：" + opponent.getHandCards()[0] + "  黄金：" + opponent.getHandCards()[1] + "  白银：" + opponent.getHandCards()[2] + "\n");
+        gameInfo.append("丝绸：" + opponent.getHandCards()[3] + "  香料：" + opponent.getHandCards()[4] + "  皮革：" + opponent.getHandCards()[5] + "\n");
+        gameInfo.append("\n");
+        gameInfo.append("---------------------------公共牌堆信息---------------------------\n");
+        gameInfo.append("钻石：" + cardsPile.getPublicCards()[0] + "  黄金：" + cardsPile.getPublicCards()[1] + "  白银：" + cardsPile.getPublicCards()[2] + "\n");
+        gameInfo.append("丝绸：" + cardsPile.getPublicCards()[3] + "  香料：" + cardsPile.getPublicCards()[4] + "  皮革：" + cardsPile.getPublicCards()[5] + "\n");
+        gameInfo.append("骆驼：" + cardsPile.getPublicCards()[6] + "\n");
+        gameInfo.append("\n");
+        gameInfo.append("---------------------------奖励信息---------------------------\n");
+        gameInfo.append("钻石：" + Arrays.toString(goodsPile.getDiamondScore()) + "\n");
+        gameInfo.append("黄金：" + Arrays.toString(goodsPile.getGoldScore()) + "\n");
+        gameInfo.append("白银：" + Arrays.toString(goodsPile.getSilverScore()) + "\n");
+        gameInfo.append("丝绸：" + Arrays.toString(goodsPile.getSilkScore()) + "\n");
+        gameInfo.append("香料：" + Arrays.toString(goodsPile.getSpiceScore()) + "\n");
+        gameInfo.append("皮革：" + Arrays.toString(goodsPile.getLeatherScore()) + "\n");
+        gameInfo.append("\n");
+        gameInfo.append("三堆：" + bonusPile.getThreeTokenNum() + "\n");
+        gameInfo.append("四堆：" + bonusPile.getFourTokenNum() + "\n");
+        gameInfo.append("五堆：" + bonusPile.getFiveTokenNum() + "\n");
 
         return gameInfo.toString();
     }

@@ -70,6 +70,8 @@ public class CommandStart extends BaseCommand {
             }else {
                 gameState.setHandOrder(HandOrder.OPPONENT);
             }
+
+            execSuccess(false, true);
         }else {
             StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARAM_MISSING);
         }

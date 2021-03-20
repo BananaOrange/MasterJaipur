@@ -50,6 +50,8 @@ public class CommandSell extends BaseCommand{
             }else {
                 gameState.getOpponent().addScore(goodsScore + bonusScore[0], goodsScore + bonusScore[1]);
             }
+
+            execSuccess(true, true);
         }else {
             StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARAM_MISSING);
         }
