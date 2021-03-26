@@ -41,6 +41,15 @@ public class BaseCommand {
     }
 
     /**
+     * 校验游戏是否开始
+     *
+     * 说明：不允许其他命令早于start执行
+     */
+    public static boolean checkStartFlag() {
+        return BaseState.getInstance().getStartFlag();
+    }
+
+    /**
      * 命令执行成功后需进行的后续操作
      *
      * exchangeFlag:是否交换当前游戏方  printFlag:是否打印游戏信息

@@ -2,7 +2,6 @@ package jaipur.command;
 
 import jaipur.constant.Const;
 import jaipur.control.BaseState;
-import jaipur.control.GameState;
 import jaipur.view.StoredViews;
 
 import java.lang.reflect.Method;

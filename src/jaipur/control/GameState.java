@@ -105,7 +105,11 @@ public class GameState {
         gameInfo.append("钻石：" + opponent.getHandCards()[0] + "  黄金：" + opponent.getHandCards()[1] + "  白银：" + opponent.getHandCards()[2] + "\n");
         gameInfo.append("丝绸：" + opponent.getHandCards()[3] + "  香料：" + opponent.getHandCards()[4] + "  皮革：" + opponent.getHandCards()[5] + "\n");
         gameInfo.append("\n");
-        gameInfo.append("---------------------------公共牌堆信息---------------------------\n");
+        gameInfo.append("---------------------------发牌堆信息-----------------------\n");
+        gameInfo.append("钻石：" + cardsPile.getUnknownCards()[0] + "  黄金：" + cardsPile.getUnknownCards()[1] + "  白银：" + cardsPile.getUnknownCards()[2] + "\n");
+        gameInfo.append("丝绸：" + cardsPile.getUnknownCards()[3] + "  香料：" + cardsPile.getUnknownCards()[4] + "  皮革：" + cardsPile.getUnknownCards()[5] + "\n");
+        gameInfo.append("骆驼：" + cardsPile.getUnknownCards()[6] + "\n");
+        gameInfo.append("---------------------------公共牌堆信息-----------------------\n");
         gameInfo.append("钻石：" + cardsPile.getPublicCards()[0] + "  黄金：" + cardsPile.getPublicCards()[1] + "  白银：" + cardsPile.getPublicCards()[2] + "\n");
         gameInfo.append("丝绸：" + cardsPile.getPublicCards()[3] + "  香料：" + cardsPile.getPublicCards()[4] + "  皮革：" + cardsPile.getPublicCards()[5] + "\n");
         gameInfo.append("骆驼：" + cardsPile.getPublicCards()[6] + "\n");
@@ -118,9 +122,9 @@ public class GameState {
         gameInfo.append("香料：" + Arrays.toString(goodsPile.getSpiceScore()) + "\n");
         gameInfo.append("皮革：" + Arrays.toString(goodsPile.getLeatherScore()) + "\n");
         gameInfo.append("\n");
-        gameInfo.append("三堆：" + bonusPile.getThreeTokenNum() + "\n");
-        gameInfo.append("四堆：" + bonusPile.getFourTokenNum() + "\n");
-        gameInfo.append("五堆：" + bonusPile.getFiveTokenNum() + "\n");
+        gameInfo.append("三堆：" + bonusPile.getThreeTokenNum());
+        gameInfo.append("  四堆：" + bonusPile.getFourTokenNum());
+        gameInfo.append("  五堆：" + bonusPile.getFiveTokenNum());
 
         return gameInfo.toString();
     }

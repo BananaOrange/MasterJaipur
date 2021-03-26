@@ -7,6 +7,7 @@ import java.util.HashMap;
  */
 public class BaseState {
 
+    private boolean startFlag = false;//游戏是否开始
     private HashMap<String, Class> commandMap = new HashMap<>();//命令列表
     private HashMap<String, Integer> itemMap = new HashMap<String, Integer>();//预设物品列表,用于快速判断输入命令正确与否;同时为牌堆数组快速提供下标值,便于操作数组
 
@@ -19,6 +20,14 @@ public class BaseState {
             instance = new BaseState();
         }
         return instance;
+    }
+
+    public boolean getStartFlag() {
+        return startFlag;
+    }
+
+    public void setStartFlag(boolean startFlag) {
+        this.startFlag = startFlag;
     }
 
     public HashMap<String, Class> getCommandMap() {

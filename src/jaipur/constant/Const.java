@@ -32,4 +32,6 @@ public class Const {
     public static final String COMMAND_ITEMS_ERROR = "命令中货物通用命令输入错误,请重新输入";
 
     public static final String COMMAND_ORDER_ERROR = "命令中先后手标志输入错误,请重新输入";
+
+    public static final String GAME_HAS_NOT_STARTED = "游戏尚未开始,请重新输入";
 }

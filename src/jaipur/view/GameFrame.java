@@ -88,8 +88,9 @@ class NorthPanel extends JPanel {
         jLabel.setSize(50,ELEMENT_HEIGHT);
         jTextField.setPreferredSize(new Dimension(350, ELEMENT_HEIGHT));
         jButton.setPreferredSize(new Dimension(100, ELEMENT_HEIGHT));
-        //为按钮添加事件
+        //为命令输入框和按钮添加事件
         ButtonListener buttonListener = new ButtonListener();
+        jTextField.addActionListener(buttonListener);
         jButton.addActionListener(buttonListener);
 
         this.add(jLabel);
@@ -144,8 +145,8 @@ class WestPanel extends JPanel {
  */
 class EastPanel extends JPanel {
 
-    private static final int WEST_PANEL_WIDTH = 300;
-    private static final int WEST_PANEL_HEIGHT = 500;
+    private static final int EAST_PANEL_WIDTH = 300;
+    private static final int EAST_PANEL_HEIGHT = 500;
     private static final int TEXTAREA_ROWS = 30;
     private static final int TEXTAREA_COLUMNS = 25;
 
@@ -153,7 +154,7 @@ class EastPanel extends JPanel {
     private JScrollPane jScrollPane = new JScrollPane(jTextArea);
 
     public EastPanel() {
-        this.setPreferredSize(new Dimension(WEST_PANEL_WIDTH, WEST_PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(EAST_PANEL_WIDTH, EAST_PANEL_HEIGHT));
 
         jTextArea.setLineWrap(true);
         jTextArea.setEditable(false);

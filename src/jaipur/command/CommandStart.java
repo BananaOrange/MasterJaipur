@@ -3,6 +3,7 @@ package jaipur.command;
 import jaipur.annotation.Command;
 import jaipur.constant.Const;
 import jaipur.constant.HandOrder;
+import jaipur.control.BaseState;
 import jaipur.control.GameState;
 import jaipur.view.StoredViews;
 
@@ -47,6 +48,9 @@ public class CommandStart extends BaseCommand {
                 StoredViews.getInstance().showCommandMessage(Const.COMMAND_ORDER_ERROR);
                 return;
             }
+
+            //更新游戏开始标记
+            BaseState.getInstance().setStartFlag(true);
 
             //初始化牌堆
             gameState.getCardsPile().initUnknownCards();

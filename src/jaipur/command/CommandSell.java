@@ -29,6 +29,10 @@ public class CommandSell extends BaseCommand{
             GameState gameState = GameState.getInstance();
 
             //检查命令
+            if (!checkStartFlag()) {
+                StoredViews.getInstance().showCommandMessage(Const.GAME_HAS_NOT_STARTED);
+                return;
+            }
             if(!checkItems(splitCommand[1])) {
                 StoredViews.getInstance().showCommandMessage(Const.COMMAND_ITEMS_ERROR);
                 return;
