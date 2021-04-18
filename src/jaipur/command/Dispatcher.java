@@ -67,6 +67,7 @@ public class Dispatcher {
         itemMap.put("1x", 4);itemMap.put("2x", 4);itemMap.put("3x", 4);itemMap.put("4x", 4);itemMap.put("5x", 4);
         itemMap.put("1p", 5);itemMap.put("2p", 5);itemMap.put("3p", 5);itemMap.put("4p", 5);itemMap.put("5p", 5);
         itemMap.put("1l", 6);itemMap.put("2l", 6);itemMap.put("3l", 6);itemMap.put("4l", 6);itemMap.put("5l", 6);
+        itemMap.put("0l", 6);
         baseState.setItemMap(itemMap);
     }
 }

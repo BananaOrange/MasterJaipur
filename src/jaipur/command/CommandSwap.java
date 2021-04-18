@@ -3,7 +3,9 @@ package jaipur.command;
 import jaipur.annotation.Command;
 import jaipur.constant.Const;
 import jaipur.constant.HandOrder;
+import jaipur.control.BaseState;
 import jaipur.control.GameState;
+import jaipur.control.GuessCards;
 import jaipur.view.StoredViews;
 
 /**
@@ -27,6 +29,7 @@ public class CommandSwap extends BaseCommand{
 
             //获取全局游戏变量
             GameState gameState = GameState.getInstance();
+            GuessCards guessCards = BaseState.getInstance().getGuessCards();
 
             //检查命令
             if (!checkStartFlag()) {
@@ -44,15 +47,19 @@ public class CommandSwap extends BaseCommand{
             //将公共牌堆的牌添加到玩家手牌堆中(需判断当前游戏方)
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().addHandCards(splitCommand[1]);
-            }else {
-                gameState.getOpponent().addHandCards(splitCommand[1]);
             }
 
             //从玩家手牌堆中拿取待交换的牌(需判断当前游戏方)
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().removeHandCards(splitCommand[2]);
             }else {
-                gameState.getOpponent().removeHandCards(splitCommand[2]);
+                if(guessCards.getGuessFlag()) {
+                    gameState.getOpponent().removeHandCards(splitCommand[2]);
+                }else {
+                    //猜测对手手牌 & 复制猜测结果
+                    BaseState.getInstance().getGuessCards().guessBySwap(splitCommand[1], splitCommand[2]);
+                    BaseState.getInstance().getGuessCards().copyGuessCards();
+                }
             }
 
             //将玩家待交换的牌添加到公共牌堆

@@ -3,7 +3,9 @@ package jaipur.command;
 import jaipur.annotation.Command;
 import jaipur.constant.Const;
 import jaipur.constant.HandOrder;
+import jaipur.control.BaseState;
 import jaipur.control.GameState;
+import jaipur.control.GuessCards;
 import jaipur.view.StoredViews;
 
 /**
@@ -27,6 +29,7 @@ public class CommandSell extends BaseCommand{
 
             //获取全局游戏变量
             GameState gameState = GameState.getInstance();
+            GuessCards guessCards = BaseState.getInstance().getGuessCards();
 
             //检查命令
             if (!checkStartFlag()) {
@@ -42,12 +45,18 @@ public class CommandSell extends BaseCommand{
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().removeHandCards(splitCommand[1]);
             }else {
-                gameState.getOpponent().removeHandCards(splitCommand[1]);
+                if(guessCards.getGuessFlag()) {
+                    gameState.getOpponent().removeHandCards(splitCommand[1]);
+                }else {
+                    //猜测对手手牌 & 复制猜测结果
+                    BaseState.getInstance().getGuessCards().guessBySell(splitCommand[1]);
+                    BaseState.getInstance().getGuessCards().copyGuessCards();
+                }
             }
 
             //获取可奖励的分数，并添加给玩家(需判断当前游戏方)
-            int goodsScore = gameState.getGoodsPile().getGoodsScore(command);
-            int[] bonusScore = gameState.getBonusPile().getBonusScore(command);
+            int goodsScore = gameState.getGoodsPile().getGoodsScore(splitCommand[1]);
+            int[] bonusScore = gameState.getBonusPile().getBonusScore(splitCommand[1]);
 
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().addScore(goodsScore + bonusScore[0], goodsScore + bonusScore[1]);

@@ -78,35 +78,35 @@ public class GoodsPile {
     /**
      *  获取出售货物后的分值
      */
-    public int getGoodsScore(String command) {
+    public int getGoodsScore(String item) {
         HashMap<String, Integer> itemMap = BaseState.getInstance().getItemMap();
 
-        int index = itemMap.get(command);
+        int index = itemMap.get(item);
         int score = 0;
 
         switch (index) {
             case 0 :
-                score = removeGoods(diamondScore, command);
+                score = removeGoods(diamondScore, item);
                 break;
 
             case 1 :
-                score = removeGoods(goldScore, command);
+                score = removeGoods(goldScore, item);
                 break;
 
             case 2 :
-                score = removeGoods(silverScore, command);
+                score = removeGoods(silverScore, item);
                 break;
 
             case 3 :
-                score = removeGoods(silkScore, command);
+                score = removeGoods(silkScore, item);
                 break;
 
             case 4 :
-                score = removeGoods(spiceScore, command);
+                score = removeGoods(spiceScore, item);
                 break;
 
             case 5 :
-                score = removeGoods(leatherScore, command);
+                score = removeGoods(leatherScore, item);
                 break;
 
             default:
@@ -116,8 +116,8 @@ public class GoodsPile {
         return score;
     }
 
-    public int removeGoods(int[] goodsPile, String command) {
-        int goodsNum = Integer.parseInt(command.substring(0, 1));//货物个数
+    public int removeGoods(int[] goodsPile, String item) {
+        int goodsNum = Integer.parseInt(item.substring(0, 1));//货物个数
         int score = 0;
         int count = 0;
 

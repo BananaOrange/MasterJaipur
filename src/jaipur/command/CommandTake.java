@@ -3,7 +3,9 @@ package jaipur.command;
 import jaipur.annotation.Command;
 import jaipur.constant.Const;
 import jaipur.constant.HandOrder;
+import jaipur.control.BaseState;
 import jaipur.control.GameState;
+import jaipur.control.GuessCards;
 import jaipur.view.StoredViews;
 
 /**
@@ -27,6 +29,7 @@ public class CommandTake extends BaseCommand{
 
             //获取全局游戏变量
             GameState gameState = GameState.getInstance();
+            GuessCards guessCards = BaseState.getInstance().getGuessCards();
 
             //检查命令
             if (!checkStartFlag()) {
@@ -45,7 +48,13 @@ public class CommandTake extends BaseCommand{
             if(gameState.getHandOrder() == HandOrder.MYSELF) {
                 gameState.getMyself().addHandCards(splitCommand[1]);
             }else {
-                gameState.getOpponent().addHandCards(splitCommand[1]);
+                if(guessCards.getGuessFlag()) {
+                    gameState.getOpponent().addHandCards(splitCommand[1]);
+                }else {
+                    //猜测对手手牌 & 复制猜测结果
+                    guessCards.guessByTake(splitCommand[1]);
+                    guessCards.copyGuessCards();
+                }
             }
 
             //从未翻开牌堆中拿取一张牌

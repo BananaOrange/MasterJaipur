@@ -21,7 +21,7 @@ public class GameState {
     private GoodsPile goodsPile = new GoodsPile();//货物标志堆
     private BonusPile bonusPile = new BonusPile();//奖励标志堆
 
-    private static GameState instance = new GameState();
+    private static GameState instance;
 
     /**
      * 私有构造方法
@@ -91,8 +91,10 @@ public class GameState {
      */
     public String refreshGameState() {
         StringBuffer gameInfo = new StringBuffer();
+        GuessCards guessCards = BaseState.getInstance().getGuessCards();
         //刷新玩家信息
-        gameInfo.append("当前游戏方：" + (handOrder==HandOrder.MYSELF?"我":"对手") + "\n");
+        gameInfo.append("当前游戏方：" + (handOrder==HandOrder.MYSELF?"我":"对手"));
+        gameInfo.append("                手牌猜测成功：" + (guessCards.getGuessFlag()?"是":"否") + "\n");
         gameInfo.append("\n");
         gameInfo.append("---------------------------玩家信息---------------------------\n");
         gameInfo.append("【我】得分：" + myself.getMinScore() + " ~ " + myself.getMaxScore());

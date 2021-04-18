@@ -8,10 +8,11 @@ import java.util.HashMap;
 public class BaseState {
 
     private boolean startFlag = false;//游戏是否开始
+    private GuessCards guessCards = new GuessCards();//对手手牌猜测类
     private HashMap<String, Class> commandMap = new HashMap<>();//命令列表
     private HashMap<String, Integer> itemMap = new HashMap<String, Integer>();//预设物品列表,用于快速判断输入命令正确与否;同时为牌堆数组快速提供下标值,便于操作数组
 
-    private static BaseState instance = new BaseState();
+    private static BaseState instance;
 
     private BaseState(){ }
 
@@ -44,5 +45,13 @@ public class BaseState {
 
     public void setItemMap(HashMap<String, Integer> itemMap) {
         this.itemMap = itemMap;
+    }
+
+    public GuessCards getGuessCards() {
+        return guessCards;
+    }
+
+    public void setGuessCards(GuessCards guessCards) {
+        this.guessCards = guessCards;
     }
 }

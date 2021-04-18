@@ -109,10 +109,10 @@ public class BonusPile {
     /**
      *  获取出售货物后的奖励分值
      */
-    public int[] getBonusScore(String command) {
+    public int[] getBonusScore(String item) {
 
         int[] score = new int[]{0, 0};
-        int goodsNum = Integer.parseInt(command.substring(0, 1));//货物个数
+        int goodsNum = Integer.parseInt(item.substring(0, 1));//货物个数
 
         if(goodsNum < 3) {
             return score;

@@ -5,6 +5,7 @@ import jaipur.constant.Const;
 import jaipur.constant.HandOrder;
 import jaipur.control.BaseState;
 import jaipur.control.GameState;
+import jaipur.control.GuessCards;
 import jaipur.view.StoredViews;
 
 /**
@@ -30,9 +31,10 @@ public class CommandStart extends BaseCommand {
 
             //初始化全局游戏变量
             GameState gameState = GameState.getInstance();
+            GuessCards guessCards = BaseState.getInstance().getGuessCards();
 
             //检查命令
-            if(!checkItems(splitCommand[1]) || !splitCommand[1].contains("3l") || !splitCommand[1].contains("2")) {
+            if(!checkItems(splitCommand[1]) || !splitCommand[1].contains("3l")) {
                 StoredViews.getInstance().showCommandMessage(Const.COMMAND_ITEMS_ERROR);
                 return;
             }
@@ -58,15 +60,17 @@ public class CommandStart extends BaseCommand {
             gameState.getCardsPile().addPublicCards(splitCommand[1]);
 
             //初始化我的手牌
-
             gameState.getMyself().addHandCards(splitCommand[2]);
 
             //初始化对手骆驼牌(需处理骆驼牌数量不确定的情况)
+            //交由手牌猜测类处理
+            /*
             if(splitCommand[3].equals("?")) {
                 gameState.getOpponent().setUnknownHandCards(6);
             }else {
                 gameState.getOpponent().addHandCards(splitCommand[3]);
             }
+             */
 
             //初始化先后手标志
             if(splitCommand[4].equals("0")) {
@@ -74,6 +78,10 @@ public class CommandStart extends BaseCommand {
             }else {
                 gameState.setHandOrder(HandOrder.OPPONENT);
             }
+
+            //猜测对手手牌 & 复制猜测结果
+            guessCards.guessByStart(splitCommand[3]);
+            guessCards.copyGuessCards();
 
             execSuccess(false, true);
         }else {

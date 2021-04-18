@@ -23,7 +23,7 @@ public class Const {
 
     public static final int HAND_CARD_LIMIT = 7;//手牌数量限制
 
-    public static final int PUBLIC_CARD_NUM = 5;//公共牌堆数量
+    public static final int HARD_CARD_INIT = 5;//初始手牌数量
 
     public static final String COMMAND_PARSING_ERROR = "命令解析错误,请重新输入";
 
