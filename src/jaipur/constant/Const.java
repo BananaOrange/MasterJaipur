@@ -7,6 +7,9 @@ import java.util.Set;
  * 保存一些常量
  */
 public class Const {
+
+    public static final int UNKNOWN_CARDS_NUM = 55;//未翻开牌堆初始数量
+
     public static final int DIAMOND_CARD_NUM = 6;//钻石牌数量
 
     public static final int GOLD_CARD_NUM = 6;//黄金牌数量

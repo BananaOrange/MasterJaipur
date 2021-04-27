@@ -130,4 +130,21 @@ public class GameState {
 
         return gameInfo.toString();
     }
+
+    /**
+     * 判断游戏是否结束
+     */
+    public boolean isEnded() {
+        //牌全部发完
+        if(cardsPile.getLeftNum() == 0) {
+            return true;
+        }
+
+        //货物堆只剩三堆
+        if(goodsPile.getZeroPileNum() == 3) {
+            return true;
+        }
+
+        return false;
+    }
 }

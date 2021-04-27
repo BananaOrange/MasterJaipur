@@ -9,12 +9,21 @@ import java.util.HashMap;
  * 牌堆类，保存每种牌的相关信息
  */
 public class CardsPile {
+    private int leftNum;//未翻开的牌数量
     private int[] unknownCards;//未翻开的牌堆(数组容量7,分别对应钻石/黄金/白银/丝绸/香料/皮革/骆驼的数量)
     private int[] publicCards;//公共牌堆(数组容量7,分别对应钻石/黄金/白银/丝绸/香料/皮革/骆驼的数量)
 
     public CardsPile() {
         this.unknownCards = new int[7];
         this.publicCards = new int[7];
+    }
+
+    public int getLeftNum() {
+        return leftNum;
+    }
+
+    public void setLeftNum(int leftNum) {
+        this.leftNum = leftNum;
     }
 
     public int[] getUnknownCards() {
@@ -38,6 +47,7 @@ public class CardsPile {
      */
     public void initUnknownCards() {
         //初始化未翻开牌堆
+        leftNum = Const.UNKNOWN_CARDS_NUM;
         unknownCards[0] = Const.DIAMOND_CARD_NUM;
         unknownCards[1] = Const.GOLD_CARD_NUM;
         unknownCards[2] = Const.SILVER_CARD_NUM;
@@ -67,6 +77,7 @@ public class CardsPile {
             String sub = command.substring(i*2-2, i*2);
             int index = itemMap.get(sub);
             unknownCards[index] = unknownCards[index] - Integer.parseInt(sub.substring(0, 1));
+            leftNum -= Integer.parseInt(sub.substring(0, 1));
         }
     }
 

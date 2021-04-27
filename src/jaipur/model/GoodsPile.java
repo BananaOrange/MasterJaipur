@@ -17,6 +17,7 @@ public class GoodsPile {
     private int[] silkScore;//丝绸标志物(存储的是分值)
     private int[] spiceScore;//香料标志物(存储的是分值)
     private int[] leatherScore;//皮革标志物(存储的是分值)
+    private int zeroPileNum;//个数为零的标志物堆数量
 
     public GoodsPile() {
         this.diamondScore = new int[]{7, 7, 5, 5, 5};
@@ -25,6 +26,7 @@ public class GoodsPile {
         this.silkScore =    new int[]{5, 3, 3, 2, 2, 1, 1};
         this.spiceScore =   new int[]{5, 3, 3, 2, 2, 1, 1};
         this.leatherScore = new int[]{4, 3, 2, 1, 1, 1, 1, 1, 1};
+        this.zeroPileNum = 0;
     }
 
     public int[] getDiamondScore() {
@@ -73,6 +75,14 @@ public class GoodsPile {
 
     public void setLeatherScore(int[] leatherScore) {
         this.leatherScore = leatherScore;
+    }
+
+    public int getZeroPileNum() {
+        return zeroPileNum;
+    }
+
+    public void setZeroPileNum(int zeroPileNum) {
+        this.zeroPileNum = zeroPileNum;
     }
 
     /**
@@ -130,6 +140,10 @@ public class GoodsPile {
             if(count == goodsNum) {
                 break;
             }
+        }
+
+        if(score == 0) {
+            zeroPileNum ++;
         }
 
         return score;
