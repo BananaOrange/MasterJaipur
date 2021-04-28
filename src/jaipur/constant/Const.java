@@ -1,8 +1,5 @@
 package jaipur.constant;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * 保存一些常量
  */
@@ -24,9 +21,15 @@ public class Const {
 
     public static final int CAMEL_CARD_NUM = 11;//骆驼牌数量
 
+    public static final int CAMEL_CARD_BONUS = 5;//骆驼牌得分奖励
+
     public static final int HAND_CARD_LIMIT = 7;//手牌数量限制
 
     public static final int HARD_CARD_INIT = 5;//初始手牌数量
+
+    public static final int EVAL_SCALE = 10;//局面评估时的估值放大系数
+
+    public static final int MAX_INT = 9999;//游戏结束时的附加得分
 
     public static final String COMMAND_PARSING_ERROR = "命令解析错误,请重新输入";
 

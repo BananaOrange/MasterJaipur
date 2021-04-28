@@ -12,12 +12,14 @@ public class Player {
     private int minScore;//玩家最低得分(用来处理奖励标志分值不确定的情况)
     private int maxScore;//玩家最高得分(用来处理奖励标志分值不确定的情况)
     private int[] handCards;//玩家手牌(数组容量7,分别对应钻石/黄金/白银/丝绸/香料/皮革/骆驼的数量)
+    private int handCardsNum;//玩家手牌数量
     private boolean camelBonus;//是否有骆驼币奖励
 
     public Player() {
         this.minScore = 0;
         this.maxScore = 0;
         this.handCards = new int[]{0, 0, 0, 0, 0, 0, 0};
+        this.handCardsNum = 0;
         this.camelBonus = false;
     }
 
@@ -45,6 +47,14 @@ public class Player {
         this.handCards = handCards;
     }
 
+    public int getHandCardsNum() {
+        return handCardsNum;
+    }
+
+    public void setHandCardsNum(int handCardsNum) {
+        this.handCardsNum = handCardsNum;
+    }
+
     public boolean isCamelBonus() {
         return camelBonus;
     }
@@ -64,7 +74,8 @@ public class Player {
         for(int i=1; i<=command.length()/2; i++) {
             String sub = command.substring(i*2-2, i*2);
             int index = itemMap.get(sub);
-            handCards[index] = handCards[index] + Integer.parseInt(sub.substring(0, 1));
+            handCards[index] += Integer.parseInt(sub.substring(0, 1));
+            handCardsNum += Integer.parseInt(sub.substring(0, 1));
         }
     }
 
@@ -79,7 +90,8 @@ public class Player {
         for(int i=1; i<=command.length()/2; i++) {
             String sub = command.substring(i*2-2, i*2);
             int index = itemMap.get(sub);
-            handCards[index] = handCards[index] - Integer.parseInt(sub.substring(0, 1));
+            handCards[index] -= Integer.parseInt(sub.substring(0, 1));
+            handCardsNum -= Integer.parseInt(sub.substring(0, 1));
         }
     }
 

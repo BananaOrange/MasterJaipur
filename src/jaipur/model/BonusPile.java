@@ -1,9 +1,5 @@
 package jaipur.model;
 
-import jaipur.control.BaseState;
-
-import java.util.HashMap;
-
 /**
  * 奖励标志类
  */

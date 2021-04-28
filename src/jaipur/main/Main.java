@@ -1,7 +1,6 @@
 package jaipur.main;
 
 import jaipur.command.Dispatcher;
-import jaipur.view.GameFrame;
 import jaipur.view.StoredViews;
 
 public class Main {

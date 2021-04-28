@@ -2,10 +2,7 @@ package jaipur.model;
 
 import jaipur.control.BaseState;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * 货物标志类
@@ -17,6 +14,7 @@ public class GoodsPile {
     private int[] silkScore;//丝绸标志物(存储的是分值)
     private int[] spiceScore;//香料标志物(存储的是分值)
     private int[] leatherScore;//皮革标志物(存储的是分值)
+    private int[] goodsLeftNum;//各标志物剩余数量(数组容量6,分别对应钻石/黄金/白银/丝绸/香料/皮革的数量)
     private int zeroPileNum;//个数为零的标志物堆数量
 
     public GoodsPile() {
@@ -26,6 +24,7 @@ public class GoodsPile {
         this.silkScore =    new int[]{5, 3, 3, 2, 2, 1, 1};
         this.spiceScore =   new int[]{5, 3, 3, 2, 2, 1, 1};
         this.leatherScore = new int[]{4, 3, 2, 1, 1, 1, 1, 1, 1};
+        this.goodsLeftNum = new int[]{5, 5, 5, 7, 7, 9};
         this.zeroPileNum = 0;
     }
 
@@ -77,6 +76,14 @@ public class GoodsPile {
         this.leatherScore = leatherScore;
     }
 
+    public int[] getGoodsLeftNum() {
+        return goodsLeftNum;
+    }
+
+    public void setGoodsLeftNum(int[] goodsLeftNum) {
+        this.goodsLeftNum = goodsLeftNum;
+    }
+
     public int getZeroPileNum() {
         return zeroPileNum;
     }
@@ -96,27 +103,27 @@ public class GoodsPile {
 
         switch (index) {
             case 0 :
-                score = removeGoods(diamondScore, item);
+                score = removeGoods(diamondScore, item, 0);
                 break;
 
             case 1 :
-                score = removeGoods(goldScore, item);
+                score = removeGoods(goldScore, item, 1);
                 break;
 
             case 2 :
-                score = removeGoods(silverScore, item);
+                score = removeGoods(silverScore, item, 2);
                 break;
 
             case 3 :
-                score = removeGoods(silkScore, item);
+                score = removeGoods(silkScore, item, 3);
                 break;
 
             case 4 :
-                score = removeGoods(spiceScore, item);
+                score = removeGoods(spiceScore, item, 4);
                 break;
 
             case 5 :
-                score = removeGoods(leatherScore, item);
+                score = removeGoods(leatherScore, item, 5);
                 break;
 
             default:
@@ -126,7 +133,7 @@ public class GoodsPile {
         return score;
     }
 
-    public int removeGoods(int[] goodsPile, String item) {
+    public int removeGoods(int[] goodsPile, String item, int index) {
         int goodsNum = Integer.parseInt(item.substring(0, 1));//货物个数
         int score = 0;
         int count = 0;
@@ -135,6 +142,7 @@ public class GoodsPile {
             if(goodsPile[i] != 0) {
                 score += goodsPile[i];
                 goodsPile[i] = 0;
+                goodsLeftNum[index] -= 1;
                 count++;
             }
             if(count == goodsNum) {

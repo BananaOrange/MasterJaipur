@@ -6,7 +6,6 @@ import jaipur.model.CardsPile;
 import jaipur.model.GoodsPile;
 import jaipur.model.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
