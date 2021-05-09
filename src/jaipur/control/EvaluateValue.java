@@ -67,7 +67,7 @@ public class EvaluateValue {
                 opponentScore += 1;
             }
 
-            //控制游戏局势得分-售卖货物将货物堆清零
+            //控制游戏局势得分：售卖货物将货物堆清零
             if(goodsPile.getZeroPileNum() == 2) {
                 if(myselfHandCard > goodsPile.getGoodsLeftNum()[i]) {
                     myselfScore += 5;
@@ -77,7 +77,7 @@ public class EvaluateValue {
                 }
             }
 
-            //控制游戏局势得分-拿取一张牌将未翻开牌堆清零
+            //控制游戏局势得分：拿取一张牌将未翻开牌堆清零
             if(gameState.getCardsPile().getLeftNum() == 1) {
                 if(gameState.getHandOrder() == HandOrder.MYSELF) {
                     if(myself.getHandCardsNum() < Const.HAND_CARD_LIMIT) {
@@ -90,7 +90,7 @@ public class EvaluateValue {
                 }
             }
 
-            //控制游戏局势得分-拿取骆驼牌将未翻开牌堆清零
+            //控制游戏局势得分：拿取骆驼牌将未翻开牌堆清零
             if((gameState.getCardsPile().getLeftNum() >= 2) && (gameState.getCardsPile().getLeftNum() <= 5)) {
                 if(gameState.getHandOrder() == HandOrder.MYSELF) {
                     myselfScore += 5;
