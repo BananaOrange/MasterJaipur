@@ -4,6 +4,7 @@ import jaipur.constant.HandOrder;
 import jaipur.model.Player;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * 着法处理类
@@ -30,11 +31,29 @@ public class MoveHandle {
         }
         handCards = player.getHandCards();
 
-        // 生成可能翻出的牌组合
-
-
-        
-
+        // 组合未翻出的牌
+        ArrayList<String> combineUnknownCards = new ArrayList<>();
+        for(int i=0; i<unknownCards[0]; i++) {
+            combineUnknownCards.add("z");
+        }
+        for(int i=0; i<unknownCards[1]; i++) {
+            combineUnknownCards.add("h");
+        }
+        for(int i=0; i<unknownCards[2]; i++) {
+            combineUnknownCards.add("b");
+        }
+        for(int i=0; i<unknownCards[3]; i++) {
+            combineUnknownCards.add("s");
+        }
+        for(int i=0; i<unknownCards[4]; i++) {
+            combineUnknownCards.add("x");
+        }
+        for(int i=0; i<unknownCards[5]; i++) {
+            combineUnknownCards.add("p");
+        }
+        for(int i=0; i<unknownCards[6]; i++) {
+            combineUnknownCards.add("l");
+        }
 
         // 生成sell着法
         if (handCards[0] >= 2) {
@@ -79,6 +98,70 @@ public class MoveHandle {
         // 生成swap着法
 
         return moves;
+    }
+
+    /**
+     * 模拟随机发牌
+     */
+    private static String getRandomUnknownCards(ArrayList<String> combineUnknownCards, int cardNum) {
+        Random random = new Random(combineUnknownCards.size());
+        StringBuffer sb = new StringBuffer();
+
+        for(int i=0; i<cardNum; i++) {
+            sb.append("1").append(combineUnknownCards.get(random.nextInt()));
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * 发出最好的牌(只生成2种情况)
+     */
+    private static String[] getBestUnknownCards(ArrayList<String> combineUnknownCards, int[] unknownCards, int cardNum) {
+        String[] bestCards = new String[2];
+
+        // 第1种情况：按顺序获取
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<cardNum; i++) {
+            sb.append("1").append(combineUnknownCards.get(i));
+        }
+        bestCards[0] = sb.toString();
+
+        // 第2种情况：随机获取
+        sb.setLength(0);
+        Random random = new Random(cardNum * 3);
+        for(int i=0; i<cardNum; i++) {
+            sb.append("1").append(combineUnknownCards.get(random.nextInt()));
+        }
+        bestCards[1] = sb.toString();
+
+        return bestCards;
+    }
+
+    /**
+     * 发出最差的牌(只生成2种情况)
+     */
+    private static String[] getWorstUnknownCards(ArrayList<String> combineUnknownCards, int[] unknownCards, int cardNum) {
+        String[] worstCards = new String[2];
+
+        // TODO: 2021-05-17  
+
+        // 第1种情况：按顺序获取
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<cardNum; i++) {
+            sb.append("1").append(combineUnknownCards.get(i));
+        }
+        worstCards[0] = sb.toString();
+
+        // 第2种情况：随机获取
+        sb.setLength(0);
+        Random random = new Random(cardNum * 3);
+        for(int i=0; i<cardNum; i++) {
+            sb.append("1").append(combineUnknownCards.get(random.nextInt()));
+        }
+        worstCards[1] = sb.toString();
+
+        return worstCards;
     }
 
     public static GameState makeMoveByTake(GameState gameState, String move) {
