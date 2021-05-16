@@ -1,6 +1,7 @@
 package jaipur.control;
 
 import jaipur.constant.HandOrder;
+import jaipur.model.Player;
 
 import java.util.ArrayList;
 
@@ -18,15 +19,22 @@ public class MoveHandle {
         Enum<HandOrder> handOrder = gameState.getHandOrder();// 当前游戏方
         int[] unknownCards = gameState.getCardsPile().getUnknownCards();// 未翻开牌堆
         int[] publicCards = gameState.getCardsPile().getPublicCards();// 公共牌堆
-        int[] handCards; // 玩家手牌
+        Player player; // 玩家
+        int[] handCards;// 玩家手牌
+
+        // 确定玩家手牌
+        if (handOrder == HandOrder.MYSELF) {
+            player = gameState.getMyself();
+        } else {
+            player = gameState.getOpponent();
+        }
+        handCards = player.getHandCards();
 
         // 生成可能翻出的牌组合
-        if (handOrder == HandOrder.MYSELF) {
-            handCards = gameState.getMyself().getHandCards();
-        } else {
-            handCards = gameState.getOpponent().getHandCards();
-        }
-        // TODO: 2021-05-09 补充代码
+
+
+        
+
 
         // 生成sell着法
         if (handCards[0] >= 2) {
@@ -56,10 +64,15 @@ public class MoveHandle {
 
         // 生成camel着法
         if (publicCards[6] > 0) {
-
+            tempMove = "camel " + publicCards[6] + "l " + "";
+            // TODO: 2021/5/15
         }
 
         // 生成take着法
+        if (publicCards[0] > 0) {
+            tempMove = "take " + publicCards[0] + "z ";
+            moves.add(tempMove);
+        }
 
 
 
@@ -68,7 +81,8 @@ public class MoveHandle {
         return moves;
     }
 
-    public static GameState makeMove(String move) {
+    public static GameState makeMoveByTake(GameState gameState, String move) {
+        
         return gameState;
     }
 }
