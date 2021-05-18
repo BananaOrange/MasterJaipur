@@ -24,7 +24,7 @@ public class AlphaBetaSearch {
         GameState nextGameState;
         while (board.hasMoreMoves()) {
             move = board.getNextMove();
-            nextGameState = MoveHandle.makeMove(move);
+            nextGameState = MoveHandle.makeMove(gameState, move);
 
             value = -alphaBeta(nextBoard, depth-1, -beta, -alpha);
 
