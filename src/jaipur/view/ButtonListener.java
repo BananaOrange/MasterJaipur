@@ -14,5 +14,7 @@ public class ButtonListener implements ActionListener {
         NorthPanel northPanel = StoredViews.getInstance().getGameFrame().getNorthPanel();
         String command = northPanel.getjTextField().getText();
         Dispatcher.postCommand(command.toLowerCase());
+        // 清除命令
+        northPanel.getjTextField().setText("");
     }
 }

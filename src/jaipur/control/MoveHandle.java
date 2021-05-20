@@ -139,9 +139,72 @@ public class MoveHandle {
         }
 
         // 生成swap着法
-
+        tempMove = createSwapMove(publicCards, handCards);
+        if (tempMove.length() > 4) {
+            moves.add(tempMove);
+        }
 
         return moves;
+    }
+
+    /**
+     * 生成swap着法
+     */
+    private static String createSwapMove(int[] publicCards, int[] handCards) {
+        int expensiveItemNum = publicCards[0] + publicCards[1] + publicCards[2]; // 钻石、黄金、白银数量总和
+        int cheapItemNum = handCards[3] + handCards[4] + handCards[5] + handCards[6]; // 丝绸、香料、皮革、骆驼数量总和
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("swap ");
+
+        if (expensiveItemNum >= 2 && cheapItemNum >= expensiveItemNum) {
+
+            int tempHandCardsNum = 0; // 用于计算玩家需换出多少张手牌
+
+            if (publicCards[0] > 0) {
+                sb.append(publicCards[0]).append("z ");
+            }
+            if (publicCards[1] > 0) {
+                sb.append(publicCards[1]).append("h ");
+            }
+            if (publicCards[2] > 0) {
+                sb.append(publicCards[2]).append("b ");
+            }
+
+            tempHandCardsNum += handCards[6];
+            if(tempHandCardsNum > expensiveItemNum) {
+                sb.append(handCards[6] - tempHandCardsNum + expensiveItemNum).append("l");
+                return sb.toString();
+            }else {
+                sb.append(handCards[6]).append("l");
+            }
+
+            tempHandCardsNum += handCards[5];
+            if(tempHandCardsNum > expensiveItemNum) {
+                sb.append(handCards[5] - tempHandCardsNum + expensiveItemNum).append("p");
+                return sb.toString();
+            }else {
+                sb.append(handCards[5]).append("p");
+            }
+
+            tempHandCardsNum += handCards[4];
+            if(tempHandCardsNum > expensiveItemNum) {
+                sb.append(handCards[4] - tempHandCardsNum + expensiveItemNum).append("x");
+                return sb.toString();
+            }else {
+                sb.append(handCards[4]).append("x");
+            }
+
+            tempHandCardsNum += handCards[3];
+            if(tempHandCardsNum > expensiveItemNum) {
+                sb.append(handCards[3] - tempHandCardsNum + expensiveItemNum).append("s");
+                return sb.toString();
+            }else {
+                sb.append(handCards[3]).append("s");
+            }
+        }
+
+        return sb.toString();
     }
 
     /**

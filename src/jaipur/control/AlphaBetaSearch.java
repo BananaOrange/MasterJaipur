@@ -1,5 +1,7 @@
 package jaipur.control;
 
+import java.util.ArrayList;
+
 /**
  * Alpha-Beta 搜索剪枝
  */
@@ -9,24 +11,22 @@ public class AlphaBetaSearch {
      */
     public static int alphaBetaSearch(GameState gameState, int depth, int alpha, int beta) {
 
-        int value;
+        int value = 0; // 局面分值
 
         if( depth == 0 || gameState.isEnded()) {
             value = EvaluateValue.complexEval(gameState);
             return value;
         }
 
-        //着法生成
-        gameState.getOrderedMoves();
+        // 着法生成
+        ArrayList<String> moves = MoveHandle.getMoves(gameState);
         int best = Integer.MIN_VALUE;
-        int move;
 
         GameState nextGameState;
-        while (board.hasMoreMoves()) {
-            move = board.getNextMove();
+        for(String move:moves) {
             nextGameState = MoveHandle.makeMove(gameState, move);
 
-            value = -alphaBeta(nextBoard, depth-1, -beta, -alpha);
+            value = -alphaBetaSearch(nextGameState, depth-1, -beta, -alpha);
 
             if(value > best) {
                 best = value;
@@ -40,7 +40,7 @@ public class AlphaBetaSearch {
                 break;
             }
         }
+
         return best;
     }
-
 }
