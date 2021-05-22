@@ -35,6 +35,7 @@ public class Dispatcher {
                 throw new Exception();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             StoredViews.getInstance().showCommandMessage(Const.COMMAND_PARSING_ERROR);
         }
 
@@ -56,6 +57,7 @@ public class Dispatcher {
         commandMap.put("swap", CommandSwap.class);
         commandMap.put("sell", CommandSell.class);
         commandMap.put("camel", CommandCamel.class);
+        commandMap.put("ai", CommandAi.class);
         baseState.setCommandMap(commandMap);
 
         //装载预设物品列表

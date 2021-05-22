@@ -85,64 +85,67 @@ public class MoveHandle {
 
         // 生成camel着法
         if (publicCards[6] > 0) {
-            tempMove = "camel " + publicCards[6] + "l " + getBestUnknownCards(combineUnknownCards, unknownCards, publicCards[6])[1];
+            tempMove = "camel " + publicCards[6] + "l " + getBestUnknownCards(combineUnknownCards, publicCards[6]);
             moves.add(tempMove);
 
-            tempMove = "camel " + publicCards[6] + "l " + getWorstUnknownCards(combineUnknownCards, unknownCards, publicCards[6])[1];
+            tempMove = "camel " + publicCards[6] + "l " + getWorstUnknownCards(combineUnknownCards, publicCards[6]);
             moves.add(tempMove);
         }
 
         // 生成take着法
         if (player.getHandCardsNum() < Const.HAND_CARD_LIMIT) {
             if (publicCards[0] > 0) {
-                tempMove = "take " + "1z " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1z " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1z " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1z " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
             if (publicCards[1] > 0) {
-                tempMove = "take " + "1h " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1h " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1h " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1h " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
             if (publicCards[2] > 0) {
-                tempMove = "take " + "1b " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1b " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1b " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1b " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
             if (publicCards[3] > 0) {
-                tempMove = "take " + "1x " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1x " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1x " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1x " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
             if (publicCards[4] > 0) {
-                tempMove = "take " + "1s " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1s " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1s " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1s " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
             if (publicCards[5] > 0) {
-                tempMove = "take " + "1p " + getBestUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1p " + getBestUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
 
-                tempMove = "take " + "1p " + getWorstUnknownCards(combineUnknownCards, unknownCards, 1)[1];
+                tempMove = "take " + "1p " + getWorstUnknownCards(combineUnknownCards, 1);
                 moves.add(tempMove);
             }
         }
 
         // 生成swap着法
+        /*
         tempMove = createSwapMove(publicCards, handCards);
-        if (tempMove.length() > 4) {
+        if (tempMove.length() > 5) {
+            System.out.println("****:" + tempMove);
             moves.add(tempMove);
         }
+         */
 
         return moves;
     }
@@ -162,14 +165,16 @@ public class MoveHandle {
             int tempHandCardsNum = 0; // 用于计算玩家需换出多少张手牌
 
             if (publicCards[0] > 0) {
-                sb.append(publicCards[0]).append("z ");
+                sb.append(publicCards[0]).append("z");
             }
             if (publicCards[1] > 0) {
-                sb.append(publicCards[1]).append("h ");
+                sb.append(publicCards[1]).append("h");
             }
             if (publicCards[2] > 0) {
-                sb.append(publicCards[2]).append("b ");
+                sb.append(publicCards[2]).append("b");
             }
+
+            sb.append(" ");
 
             tempHandCardsNum += handCards[6];
             if(tempHandCardsNum > expensiveItemNum) {
@@ -211,64 +216,49 @@ public class MoveHandle {
      * 模拟随机发牌
      */
     private static String getRandomUnknownCards(ArrayList<String> combineUnknownCards, int cardNum) {
-        Random random = new Random(combineUnknownCards.size());
+        Random random = new Random();
         StringBuffer sb = new StringBuffer();
 
         for(int i=0; i<cardNum; i++) {
-            sb.append("1").append(combineUnknownCards.get(random.nextInt()));
+            sb.append("1").append(combineUnknownCards.get(random.nextInt(combineUnknownCards.size())));
         }
 
         return sb.toString();
     }
 
     /**
-     * 发出最好的牌(只生成2种情况)
+     * 发出最好的牌
      */
-    private static String[] getBestUnknownCards(ArrayList<String> combineUnknownCards, int[] unknownCards, int cardNum) {
-        String[] bestCards = new String[2];
-
-        // 第1种情况：按顺序获取
+    private static String getBestUnknownCards(ArrayList<String> combineUnknownCards, int cardNum) {
         StringBuffer sb = new StringBuffer();
+
+        if (combineUnknownCards.size() < cardNum) {
+            cardNum = combineUnknownCards.size();
+        }
+
         for(int i=0; i<cardNum; i++) {
             sb.append("1").append(combineUnknownCards.get(i));
         }
-        bestCards[0] = sb.toString();
 
-        // 第2种情况：随机获取
-        sb.setLength(0);
-        Random random = new Random(cardNum * 3);
-        for(int i=0; i<cardNum; i++) {
-            sb.append("1").append(combineUnknownCards.get(random.nextInt()));
-        }
-        bestCards[1] = sb.toString();
-
-        return bestCards;
+        return sb.toString();
     }
 
     /**
-     * 发出最差的牌(只生成2种情况)
+     * 发出最差的牌
      */
-    private static String[] getWorstUnknownCards(ArrayList<String> combineUnknownCards, int[] unknownCards, int cardNum) {
-        String[] worstCards = new String[2];
-
-        // 第1种情况：按逆序获取
+    private static String getWorstUnknownCards(ArrayList<String> combineUnknownCards, int cardNum) {
         StringBuffer sb = new StringBuffer();
+
+        if (combineUnknownCards.size() < cardNum) {
+            cardNum = combineUnknownCards.size();
+        }
+
         for(int i=0; i<cardNum; i++) {
-            int index = combineUnknownCards.size() - i -1;
+            int index = combineUnknownCards.size() -i -1;
             sb.append("1").append(combineUnknownCards.get(index));
         }
-        worstCards[0] = sb.toString();
 
-        // 第2种情况：随机获取
-        sb.setLength(0);
-        Random random = new Random(cardNum * 3);
-        for(int i=0; i<cardNum; i++) {
-            int index = combineUnknownCards.size() - random.nextInt() - 1;
-            sb.append("1").append(index);
-        }
-        worstCards[1] = sb.toString();
-
-        return worstCards;
+        return sb.toString();
     }
 
     public static GameState makeMove(GameState gameState, String move) {
